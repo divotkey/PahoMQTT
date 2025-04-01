@@ -10,4 +10,4 @@ It uses the Eclipse Paho MQTT C/C++ library, which is licensed under:
 - Eclipse Public License v2.0 (EPL-2.0)
 - Eclipse Distribution License v1.0 (EDL-1.0)
 
-You can find the respective license texts in the `third_party_licenses` folder.
+You can find the respective license texts in the `ThirdParty` folder.
