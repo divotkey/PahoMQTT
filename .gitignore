@@ -23,7 +23,8 @@
 *.lai
 *.la
 *.a
-*.lib
+#*.lib
+!ThirdParty/**
 
 # Executables
 *.exe
