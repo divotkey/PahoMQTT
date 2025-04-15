@@ -26,42 +26,42 @@ public:
     USimpleMQTTClient();
     virtual ~USimpleMQTTClient();
 
-    UFUNCTION(BlueprintCallable, Category = "MQTT")
+    UFUNCTION(BlueprintCallable, Category = "MQTT|Client")
     void InitializeClient(const FString& BrokerAddress, const FString& ClientID);
 
-    UFUNCTION(BlueprintCallable, Category = "MQTT")
+    UFUNCTION(BlueprintCallable, Category = "MQTT|Client")
     void Connect();
 
-    UFUNCTION(BlueprintCallable, Category = "MQTT")
+    UFUNCTION(BlueprintCallable, Category = "MQTT|Client")
     void Disconnect();
 
-    UFUNCTION(BlueprintCallable, Category = "MQTT")
+    UFUNCTION(BlueprintCallable, Category = "MQTT|Client")
     void PublishMessage(const FString& Topic, const FString& Message, int QoS = 1, bool Retain = false);
 
-    UFUNCTION(BlueprintCallable, Category = "MQTT")
+    UFUNCTION(BlueprintCallable, Category = "MQTT|Client")
     void SubscribeTopic(const FString& Topic, int QoS = 1);
 
-    UFUNCTION(BlueprintCallable, Category = "MQTT")
+    UFUNCTION(BlueprintCallable, Category = "MQTT|Client")
     void UnsubscribeTopic(const FString& Topic);
 
-    UFUNCTION(BlueprintCallable, Category = "MQTT")
+    UFUNCTION(BlueprintCallable, Category = "MQTT|Client")
     void ShutdownClient();
 
     // Check if the client is connected
-    UFUNCTION(BlueprintCallable, Category = "MQTT")
+    UFUNCTION(BlueprintCallable, Category = "MQTT|Client")
     bool IsConnected() const;
 
     // Events
-    UPROPERTY(BlueprintAssignable, Category = "MQTT")
+    UPROPERTY(BlueprintAssignable, Category = "MQTT|Client", meta = (DisplayName = "On MQTT Client Connected"))
     FOnMQTTConnected OnConnected;
 
-    UPROPERTY(BlueprintAssignable, Category = "MQTT")
+    UPROPERTY(BlueprintAssignable, Category = "MQTT|Client", meta = (DisplayName = "On MQTT Client Received Message"))
     FOnMQTTMessageReceived OnMessageReceived;
 
-    UPROPERTY(BlueprintAssignable, Category = "MQTT")
+    UPROPERTY(BlueprintAssignable, Category = "MQTT|Client", meta = (DisplayName = "On MQTT Client Connection Lost"))
     FOnMQTTConnectionLost OnConnectionLost;
 
-    UPROPERTY(BlueprintAssignable, Category = "MQTT")
+    UPROPERTY(BlueprintAssignable, Category = "MQTT|Client", meta = (DisplayName = "On MQTT Client Disconnected"))
     FOnMQTTDisconnected OnDisconnected;
 
 private:

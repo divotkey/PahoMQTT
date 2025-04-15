@@ -1,7 +1,7 @@
 {
 	"FileVersion": 3,
 	"Version": 1,
-	"VersionName": "1.0",
+	"VersionName": "1.1.0",
 	"FriendlyName": "PahoMQTT",
 	"Description": "MQTT client integration using Eclipse Paho client Library",
 	"Category": "Networking",

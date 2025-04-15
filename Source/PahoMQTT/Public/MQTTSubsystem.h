@@ -8,7 +8,11 @@
 #include "MQTTSubsystem.generated.h"
 
 /**
- * 
+ * UMQTTSubsystem is a game instance subsystem that provides MQTT client functionality.
+ * It allows connecting to an MQTT broker, publishing messages, subscribing to topics,
+ * and handling events such as connection, disconnection, and message reception.
+ * This subsystem integrates with Unreal Engine's subsystem framework to manage
+ * MQTT communication within the game instance lifecycle.
  */
 UCLASS()
 class PAHOMQTT_API UMQTTSubsystem : public UGameInstanceSubsystem
@@ -17,29 +21,29 @@ class PAHOMQTT_API UMQTTSubsystem : public UGameInstanceSubsystem
 	
 public:
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnMQTTConnected);
-	UPROPERTY(BlueprintAssignable, Category = "MQTT")
+	UPROPERTY(BlueprintAssignable, Category = "MQTT|Subsystem")
 	FOnMQTTConnected OnMQTTConnected;
 
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnMQTTMessageReceived, const FString&, Topic, const FString&, Message);
-	UPROPERTY(BlueprintAssignable, Category = "MQTT")
+	UPROPERTY(BlueprintAssignable, Category = "MQTT|Subsystem")
 	FOnMQTTMessageReceived OnMQTTMessageReceived;
 
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnMQTTConnectionLost, const FString&, Cause);
-	UPROPERTY(BlueprintAssignable, Category = "MQTT")
+	UPROPERTY(BlueprintAssignable, Category = "MQTT|Subsystem")
 	FOnMQTTConnectionLost OnMQTTConnectionLost;
 
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnMQTTDisconnected);
-	UPROPERTY(BlueprintAssignable, Category = "MQTT")
+	UPROPERTY(BlueprintAssignable, Category = "MQTT|Subsystem")
 	FOnMQTTDisconnected OnMQTTDisconnected;
 
 	virtual void Initialize(FSubsystemCollectionBase& Collection) override;
 	virtual void Deinitialize() override;
 
 	/**
-	 * Checks if the MQTT client is currently connected.
+	 * Checks if the MQTT subsystem is currently connected to the broker.
 	 * @return True if connected, false otherwise.
 	 */
-	UFUNCTION(BlueprintCallable, Category = "MQTT", meta = (DisplayName = "Is Connected", ToolTip = "Checks if the MQTT client is currently connected."))
+	UFUNCTION(BlueprintCallable, Category = "MQTT|Subsystem", meta = (DisplayName = "Is Connected", ToolTip = "Checks if the MQTT subsystem is currently connected to the broker."))
 	bool IsConnected() const;
 
 	/**
@@ -49,7 +53,7 @@ public:
 	 * @param QoS The Quality of Service level (default is 1).
 	 * @param Retain Whether to retain the message on the broker (default is false).
 	 */
-	UFUNCTION(BlueprintCallable, Category = "MQTT", meta = (DisplayName = "Publish Message", ToolTip = "Publishes a message to a specified MQTT topic."))
+	UFUNCTION(BlueprintCallable, Category = "MQTT|Subsystem", meta = (DisplayName = "Publish Message", ToolTip = "Publishes a message to a specified MQTT topic."))
 	void PublishMessage(const FString& Topic, const FString& Message, int QoS = 1, bool Retain = false);
 
 	/**
@@ -57,14 +61,14 @@ public:
 	 * @param Topic The topic to subscribe to.
 	 * @param QoS The Quality of Service level (default is 1).
 	 */
-	UFUNCTION(BlueprintCallable, Category = "MQTT", meta = (DisplayName = "Subscribe to Topic", ToolTip = "Subscribes to a specified MQTT topic."))
+	UFUNCTION(BlueprintCallable, Category = "MQTT|Subsystem", meta = (DisplayName = "Subscribe to Topic", ToolTip = "Subscribes to a specified MQTT topic."))
 	void SubscribeToTopic(const FString& Topic, int QoS = 1);
 
 	/**
 	 * Unsubscribes from a specified MQTT topic.
 	 * @param Topic The topic to unsubscribe from.
 	 */
-	UFUNCTION(BlueprintCallable, Category = "MQTT", meta = (DisplayName = "Unsubscribe from Topic", ToolTip = "Unsubscribes from a specified MQTT topic."))
+	UFUNCTION(BlueprintCallable, Category = "MQTT|Subsystem", meta = (DisplayName = "Unsubscribe from Topic", ToolTip = "Unsubscribes from a specified MQTT topic."))
 	void UnsubscribeFromTopic(const FString& Topic);
 
 private:
